@@ -1,40 +1,70 @@
-let number1: number;
-let text: string;
-let bol: boolean;
-let data: Date;
+let obj = {};
 
-text = "teste";
+enum TamanhoCaneca {
+    PEQUENA,
+    MEDIA,
+    GRANDE,
 
-number1 = 2
+}
+
+type CanecaProps = {
+    cor: string;
+    material: string;
+    tamanho: TamanhoCaneca;
+    estampa: string;
+};
+
+class Caneca {
+    public cor: string;
+    public material: string;
+    public tamanho: TamanhoCaneca;
+    public estampa: string;
+    private conteudo: string | undefined;
+
+    // constructor(){
+
+    // }
+
+    Beber() {
+        if (!this.conteudo) {
+            console.log("Caneca Vazia");
+        }
+
+        if (this.conteudo?.toUpperCase() == "VENENO") {
+            console.log("Vou tomar isso não, irmão");
+        }
+
+        if (this.conteudo?.toLocaleUpperCase() == "FARINHA") {
+            console.log("Estou tentando fazer um bolo");
+        }
+        return "Que delicia esse " + this.conteudo;
 
 
-let person1: Person;
-
-person1 = {
-    age: 22,
-    name: "Rui",
-    code: function () {
-        return "Coding";
+    }
+    Encher(conteudo: string) {
+        if (!this.conteudo) {
+            this.conteudo = conteudo;
+        } else {
+            console.log('A caneca está cheia.')
+        }
+    }
+    Quebrar() {
+        console.log("Foi-se a caneca");
+    }
+    Medir() {
+        if (this.conteudo?.toUpperCase() == "Farinha") {
+            console.log("Esse bolo vai ficar top");
+        }
     }
 }
 
-person1.age.toFixed
+const canecaDaBlue = new Caneca();
 
-console.log(number1);
+canecaDaBlue.tamanho = TamanhoCaneca.GRANDE;
+canecaDaBlue.estampa = "Logo da Blue";
+canecaDaBlue.material = "Cerâmica";
+canecaDaBlue.Encher("Café");
+canecaDaBlue.Encher("Veneno");
 
-interface person {               // interface pode extender mas não pode implementar 
-    name: string;
-    age: number;
-    code: () => string;
-}
 
-type Person  = {            // type não pode implements nem extends
-    name: string;
-    age: number;
-    code: () => string;
-}
-
-function test(person: Person): string {
-    return person.name;
-  }
-  test(person1);
+console.log(canecaDaBlue.Beber())
